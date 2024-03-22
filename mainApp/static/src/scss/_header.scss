@@ -1,0 +1,159 @@
+header
+{
+    //+ local variables +//
+    $border-color :map-get($navbar-colors, 'nav-text-p');
+    $background-color :map-get($navbar-colors, 'nav-text-s');
+    $text-color : map-get($neon-colors, 'neon-blue');
+    $glass-color-black: map-get($transparent-colors, 'black-glass'); 
+    $glass-color-white-1: map-get($transparent-colors, 'white-glass'); 
+    $glass-color-white-2: map-get($transparent-colors, 'white-glass-2'); 
+    $glass-color-white-3: map-get($transparent-colors, 'white-glass-3');
+    $glass-electric-blue: map-get($transparent-colors, 'electric-blue');
+    //+ local variables +//
+
+    //# Local Class #//
+    .active
+    {
+        transform: translate(0, 0) !important;
+    }
+    //# Local Class #//
+
+    @include placeItemInGrid(header,1,1);
+    width: calc(100% - var(--base-padding));
+    min-height: calc(var(--base-h) + var(--base-padding));
+    padding-inline: var(--base-padding);
+    @include makeFlex(row,5,1);
+    @include glassmorphismContent(rgba($background-color, .7),2rem,(.3rem,.3rem,1rem, rgba($border-color, .5)));
+    
+    &>*:not(.hamburgerMenu)
+    {   
+        @include makeFlex(row,1,1);
+        min-height: calc(var(--base-h) - var(--base-padding)) ;
+    }
+
+    .logo
+    {
+        @include glassmorphismContent(rgba($background-color, .9 ),2rem,(1.5rem,1.5rem,1rem, rgba($border-color, .9)));
+        border-radius: 1rem;
+        flex-direction: column;
+        flex-grow: .5;
+    }
+
+    .navBar
+    {
+        flex-grow: 2;
+        justify-content: space-between;
+        padding-inline: calc(var(--base-padding) * 1.2);
+        
+        .links
+        {
+            flex-grow: 4;
+            @include makeFlex(row,2,1,calc(var(--base-padding) * 4));
+            font-size: var(--xhuge-fs);
+            text-transform: capitalize;
+            
+            &>*
+            {
+                @include makeBorder(3,solid,.2rem,var(--secondary-color));
+                padding: var(--base-padding);
+            }
+        }        
+        
+        .buttons
+        {
+            flex-grow: .5;
+            @include makeFlex(row,1,1,calc(var(--base-padding)));
+            font-size: var(--xhuge-fs);
+            
+            .button
+            {
+                @include makeBorder(0,solid,0.2rem, var(--secondary-color));
+                padding: calc(var(--base-padding) / 2);
+                text-transform: capitalize;
+            }
+    
+        }
+
+    }
+
+    .hamburgerMenu
+    {
+        // border: 2px solid blue;
+        @include makeFlex(row,1,1);
+        display: none;
+        position: relative;
+        width: 5rem;
+        aspect-ratio: 1/1;
+        @include d-3BoxShadow();
+        
+        cursor: pointer;
+
+        &:hover
+        {
+            transform: translate3d(2px, -2px, 10px);
+        }
+
+        .hmbrgr-div
+        {
+            position: absolute;
+            top: calc(100% + var(--base-padding));
+            right: 0;
+
+            min-width: max-content;
+            min-height: 1rem;
+            width: calc(var(--base-w) * 1.5);
+
+            padding-block: var(--base-padding);
+
+            text-transform: capitalize;
+            transition: transform 1s ease-in-out;
+            transform: translate(120%, 25%);
+
+            @include makeBorderEach((.1rem,.1rem,.1rem,.1rem),(solid,solid,solid,solid),($glass-color-white-2,$glass-color-white-1,$glass-color-white-1,$glass-color-white-2),(1rem,1rem,1rem,1rem));
+            @include glassmorphismContent($glass-electric-blue, 5rem, (0,2.5rem,4.5rem,$glass-color-black));
+
+            &>*>*
+            {   
+                padding-inline-start: var(--base-padding);
+                padding-bottom: calc( var(--base-padding) / 2);
+                font-weight: 900;
+                
+                transition: all 10ms ease-in-out;
+
+                a
+                {
+                    color: $text-color;
+                }
+
+                &:hover
+                {   
+                    transform: scale(1.05) translateX(5%);
+                    background: $glass-color-black;
+                    a 
+                    {
+                        color: #0F1F2E;
+                        @include makeBorder(3,solid,.2rem,#0F1F2E);
+                        padding-inline: calc(var(--base-padding) / 2);
+                    }
+                }
+            }
+        }
+    }
+    
+    @media screen and ( width < 1000px) 
+    {
+        .logo
+        {
+            flex-grow: .1;
+        }
+        .navBar
+        {
+            display: none;
+        }
+        .hamburgerMenu
+        {
+            display: flex;
+        }
+    }
+}
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <!-- links icons ~ css stylesheet etc -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- ionicons icons scripts -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- ionicons icons scripts -->
+    <link rel="stylesheet" href="{% static '/src/scss/main.css' %}">
+    <!-- links icons ~ css stylesheet etc -->
+</head>
+<body class="black">
+
+    {% include './particials/onlyLogoNav.html' %} 
+
+    <main id="content">
+         <!-- register-form area start -->
+         <div class="form-box register"> 
+            <h2 class="title">Register</h2>
+
+            {% for message in  messages %}
+                <p class=""> {{ i }} {{ i.tag }} </p>
+            {% endfor %}
+            
+            <form id="register" class="form record" novalidate>
+                <div class="input-box">
+                    <input class="inp" type="text" name="firstname" required>
+                    <span class="label">First Name</span>
+                    <ion-icon class="form-icon" name="person"></ion-icon>
+                </div>
+                <div class="input-box">
+                    <input class="inp" type="text" name="lastname" required>
+                    <span class="label">Last Name</span>
+                    <ion-icon class="form-icon" name="person"></ion-icon>
+                </div>
+                <div class="input-box">
+                    <input class="inp" type="text" name="username" minlength="3" required>
+                    <span class="label">Username</span>
+                    <ion-icon class="form-icon" name="person"></ion-icon>
+                </div>
+                <div class="input-box">
+                    <input class="inp" type="email" name="email" id="email" required>
+                    <span class="label">Email</span>
+                    <ion-icon class="form-icon" name="mail"></ion-icon>
+                </div>
+                <div class="input-box">
+                    <input class="inp" type="password" name="password1" id="password1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                    <span class="label">Password</span>
+                    <ion-icon class="form-icon" name="lock-closed"></ion-icon>
+                </div>
+                <div class="input-box">
+                    <input class="inp" type="password" name="password2" id="password2" required>
+                    <span class="label">Confirm Password</span>
+                    <ion-icon class="form-icon" name="lock-closed"></ion-icon>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <div class="logreg-link">
+                    <p>Already have an account? <a href="{% url 'loginPage' %}" class="login-link">Log in</a></p>
+                </div>
+            </form>
+        </div>
+        <!-- register-form area end -->
+    </main>
+    
+</body>
+</html>

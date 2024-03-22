@@ -1,0 +1,283 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+    <main id="content">
+        
+    <!-- HOMEPAGE START -->
+        <!-- hero start -->
+        <section id="hero" class="home">
+            <h4>En iyi hizmet</h4>
+            <h2>En iyi fiyata</h2>
+            <h1>Aradigin Her Sey Burada</h1>
+            <p>Simdi alin 3 ay sonra odeyin</p>
+            <a href="shoppingPage">
+                <button type="button" class="btn-hero">Alisverise Basla</button>
+            </a>
+        </section>
+        <!-- hero end -->
+        <!-- feature start -->
+        <section id="feature" class="feature-cards">
+            <div class="feature-box">
+                <img class="feature-img" src="{% static './img/features/f1.png' %}" alt="">
+                <small class="feature-text" style="--clr:#FDDDE4">Ucretsiz Kargo</small>
+            </div>
+            <div class="feature-box">
+                <img class="feature-img" src="{% static './img/features/f2.png' %}" alt="">
+                <small class="feature-text" style="--clr:#CDEBBC">Hizli Teslimat</small>
+            </div>
+            <div class="feature-box">
+                <img class="feature-img" src="{% static './img/features/f3.png' %}" alt="">
+                <small class="feature-text" style="--clr:#D1E8F2">Butce Dostu</small>
+            </div>
+            <div class="feature-box">
+                <img class="feature-img" src="{% static './img/features/f4.png' %}" alt="">
+                <small class="feature-text" style="--clr:#CDD4F8">Ek Indirimler</small>
+            </div>
+            <div class="feature-box">
+                <img class="feature-img" src="{% static './img/features/f6.png' %}" alt="">
+                <small class="feature-text" style="--clr:#F6DBF6">7/24 Musteri Destegi</small>
+            </div>
+        </section>
+        <!-- feature end -->
+        <!-- feature product start -->
+        <section id="product" class="full-page">
+            <h2>One Cikanlar</h2>
+            <p>Yaz Geliyor... Yaza Hazir misiniz?</p>
+            <div class="product-container">
+                
+                {% for product in product  %}
+                <div class="product-card" data-p-id="{{ product.id }}">
+                    <img class="product-img" src="{{ product.p_img_1.url }}" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">{{ product.p_brand }}</span>
+                        <h5 class="product-name info-text">{{ product.p_name }}</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">{{ product.p_price }} &#8378</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </section>
+        <!-- feature product end -->
+        <!-- banner start -->
+        <section id="banner" class="banner">
+            <h4>Patron Cildirdi!!</h4>
+            <h2>2'nci urunde sepette <span>%80 indirim </span>Sadece secili T-shirtlerde</h2>
+            <button type="button" class="sub-title">Incele</button>
+        </section>        
+        <!-- banner end -->
+        <!-- Trend products starts -->
+        <section id="product-trend" class="full-page">
+            <h2>Son Trendler</h2>
+            <p>Modayi Yakalayin.. Tarzinizi Yansitin</p>
+            <div class="product-container">
+                
+                {% for product in best_seller  %}
+                <div class="product-card" data-p-id="{{ product.id }}">
+                    <img class="product-img" src="{{ product.p_img_1.url }}" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">{{ product.p_brand }}</span>
+                        <h5 class="product-name info-text">{{ product.p_name }}</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">{{ product.p_price }} &#8378</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                    
+                <!-- <div class="product-card">
+                    <img class="product-img" src="./img/products/n2.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img class="product-img" src="./img/products/n3.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img class="product-img" src="./img/products/n4.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img class="product-img" src="./img/products/n5.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img class="product-img" src="./img/products/n6.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img class="product-img" src="./img/products/n7.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img class="product-img" src="./img/products/n8.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>    -->
+            </div>
+        </section>
+        <!-- Trend products end -->
+        <!-- banners area start -->
+        <section id="banners-area" class="feature-cards">
+            <div class="banner-box" style="--clr-text: black">
+                <h4>Cilgin Teklifler</h4>
+                <h2>1 Alana 1 Bedeva</h2>
+                <span class="sub-title">Neler var neler... Bakmadan gecmeyin...</span>
+                <button class="banner-btn" type="button">Detayli Bilgi</button>
+            </div>
+            <div class="banner-box" style="--clr-text: #CB48B7">
+                <h4>Bahar Geliyor</h4>
+                <h2>Sepette 30% Indirim</h2>
+                <span class="sub-title">Baharin tum esintisini dolaplarinizda...</span>
+                <button class="banner-btn" type="button">Detayli Bilgi</button>
+            </div>
+            <div class="banner-box sm-1" style="--clr-text: #C6C5B9">
+                <h4>Taki ve Aksesuvar</h4>
+                <h2>Parildayin...</h2>
+                <button class="banner-btn" type="button">Detayli Bilgi</button>
+            </div>
+            <div class="banner-box sm-2" style="--clr-text: lime">
+                <h4>65% Indirim</h4>
+                <h2>Kisliklarda</h2>
+                <button class="banner-btn" type="button">Detayli Bilgi</button>
+            </div>
+            <div class="banner-box sm-1" style="--clr-text: #19344D">
+                <h4>50% Indirim</h4>
+                <h2>Secili Markalar</h2>
+                <button class="banner-btn" type="button">Detayli Bilgi</button>
+            </div>
+        </section>
+        <!-- banners area end -->
+        <!-- newsletter form start -->
+        <section id="newsletter" class="newsletter">
+            <div class="newstext">
+                <h4>Haberdar Olmak icin Kayit Ol!</h4>
+                <p>Supriz indirmler ve size ozel teklifleri E-posta olarak alin...</p>
+            </div>
+            <form id="newsletter-form" action="" class="form">
+                    <input type="email" name="email" id="email" placeholder="E-posta adresinizi yazin ">
+                    <button type="button">GONDER</button>
+                </form>
+        </section>
+        <!-- newsletter form end -->
+    <!-- HOMEPAGE END -->
+
+    </main>
+{% endblock body %}

@@ -1,0 +1,423 @@
+//# Local Class #//
+%feature-box
+{
+    @include glassmorphismContent(rgb(white,.1),2.5rem,(2rem,2rem,3rem,rgb(black,.1)));
+    @include makeBorder(0,solid,.1rem, darkgrey);
+
+    padding-block: calc(var(--base-padding) * 2.5);
+    padding-inline: calc(var(--base-padding) * 1.5);
+          
+    text-align: center;
+
+    .feature-img
+    {
+        margin-bottom: var(--base-padding);
+    }
+
+    .feature-text
+    {
+        display: inline-block;
+        padding-inline: .8rem;
+        padding-block: .9rem;
+        color: $skobelof-color;
+        background: var(--clr);
+    }
+   
+}
+
+%product-card
+{
+    height: 100%;
+            
+    @include makeFlex(column,0,0,0);
+    @include glassmorphismContent(rgb(black,.1),3rem,(.3rem,.3rem,3rem,rgb(white,.1)));
+    @include makeBorderEach((.1rem,.1rem,.1rem,.1rem),(solid,solid,solid,solid),($card-border-clr-2,$card-border-clr,$card-border-clr,$card-border-clr-2),($card-border-rds,$card-border-rds,$card-border-rds,$card-border-rds));
+
+    .product-img
+    {
+        $img-border-rds : calc($card-border-rds - $card-padding);
+        width: 100%;
+        margin-bottom: var(--base-padding);
+        flex-grow: 1;
+
+        cursor: grab;
+
+        @include glassmorphismContent(rgb(white,.1),3rem,(.3rem,.3rem,3rem,rgb(black,.1)));
+        @include makeBorderEach((.1rem,.1rem,.1rem,.1rem),(solid,solid,solid,solid),($card-border-clr-2,$card-border-clr,$card-border-clr,$card-border-clr-2),($card-border-rds,$card-border-rds,$card-border-rds,$card-border-rds));
+
+    }
+
+    .product-content
+    {
+        flex-grow: .5;
+        text-transform: capitalize;
+        @include makeFlex(column,2,0,1%);
+                
+        &>*
+        {
+            margin-bottom: calc(var(--base-padding) / 2);
+        }
+
+        .brand
+        {
+            text-align: left;
+            color: red;
+            font-weight: 900;
+        }
+
+        .product-name
+        {
+            color: blue;
+            font-weight: 700;
+        }
+
+        .product-rate
+        {
+            text-align: right;
+            cursor: pointer;
+        }
+                
+        .add-chart
+        {
+            color: map-get($neon-colors, 'neon-red') ;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            .product-price
+            {
+                text-align: center;
+            } 
+        }
+    }
+}
+//# Local Class #//
+
+#hero
+{
+    grid-column: 2 / 12;
+    grid-row: 1;
+}
+
+#feature
+{
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+#product
+{
+    border: none !important;
+    grid-column: 1 / -1;
+    grid-row: 3;
+}
+
+#banner
+{
+    grid-column: 1 / -1;
+    grid-row: 4;
+    background: {
+        image: url(../../img/banner/b2.jpg);
+        size: cover;
+        position: center;
+    };
+}
+
+#product-trend
+{
+    border: none !important;
+    grid-column: 1 / -1;
+    grid-row: 5;
+}
+
+#banners-area
+{
+    border: none !important;
+    grid-column: 2 / 12;
+    grid-row: 6;
+    height: auto;
+
+    @include makeGrid(4);
+    .sm-1
+    {
+        min-width: 70%;
+        width: 70%;
+        min-height: calc(var(--base-dvh) * 3.5);
+        margin-right: 2px;
+        padding: var(--base-padding); 
+    }
+    .sm-2
+    {
+        min-width: 60%;
+        width: 60%;
+        min-height: calc(var(--base-dvh) * 3.5);
+        margin-right: 2px;
+        padding: var(--base-padding); 
+    }
+}
+
+#newsletter
+{
+    grid-column: 1 / -1;
+    grid-row: 7;
+}
+
+.home
+{
+    @include makeFlex(column,1,2);
+    height: calc(var(--base-dvh) * 9);
+    background: {
+        image : url(../../img/hero.png);
+        position: right;
+        repeat : no-repeat;
+        size: cover
+    };
+
+    h1 {color: $skobelof-color;}
+
+    .btn-hero
+    {
+        background: {
+            image : url(../../img/button.png);
+            color: transparent;
+            repeat: no-repeat;
+        };
+
+        color: $skobelof-color;
+        border: none;
+        padding-block: 1.4rem ;
+        padding-inline: 7rem 6.5rem;
+
+        font-size: var(--huge-fs);
+        font-weight: 800;
+
+        cursor: pointer;
+    }
+}
+
+.full-page
+{
+    text-align: center;
+    padding-inline: 5rem;
+}
+
+.feature-cards
+{
+
+    @include makeFlex(row,4,1,0,wrap);
+    width: 100%;
+    padding-block: calc(var(--base-padding) * 4);
+    padding-inline: var(--base-padding);
+
+    h2,p 
+    { 
+        width: 100%;
+        text-align: center;
+        padding-block: 1rem;
+    }
+
+    @extend %feature-box;
+}
+
+.product-container
+{
+    $base-p-card-w : 24rem; 
+    @include makeGrid(auto-fill,($base-p-card-w,1fr),var(--base-padding),center,center);
+
+    .product-card
+    {
+        width: clamp($base-p-card-w,25%,25%);
+        padding: $card-padding;
+
+        @extend %product-card;
+    }
+}
+
+.banner
+{   
+    @include makeFlex(column,1,1,2rem);
+    min-height: calc(var(--base-dvh) * 4);
+
+    text-align: center;
+    color: map-get($neon-colors, 'neon-yellow');
+    
+
+    span{ color: map-get($neon-colors, 'neon-red')}
+
+    button
+    {
+        padding: var(--base-padding) calc(var(--base-padding)*2);
+        color: darkblue;
+        font-weight: 900;
+
+        @include makeBorder(0,solid,.2rem,map-get($neon-colors, 'neon-pink'));
+
+        cursor: pointer;
+        background: transparent;
+
+        transition: background 1s ease-in, transform 50ms ease-out;
+
+        &:hover
+        {
+            background-color: map-get($neon-colors, 'neon-pink');
+            transform: scale(1.05);
+
+        }
+    }
+}
+
+.banner-box
+{
+    min-width: 50rem;
+    width: 100%;
+    max-height: calc(var(--base-dvh) * 6);
+    color: var(--clr-text);
+    @include makeFlex(column,1,2);
+    padding: calc(var(--base-padding) * 3);
+    
+    .banner-btn
+    {
+        padding: calc(var(--base-padding) * .8);
+        font-size: var(--large-fs);
+        cursor: pointer;
+    }
+
+    &:nth-child(1)
+    {
+        grid-column: 1 / span 2;
+        grid-row: 1;
+        background: {
+            image : url(../../img/banner/b17.jpg);
+            repeat: no-repeat;
+            size: cover;
+        }
+        align-self: center;
+    }
+
+    &:nth-child(2)
+    {
+        grid-column: 3 / span 2 ;
+        grid-row: 1;
+        background: {
+            image : url(../../img/banner/b10.jpg);
+            repeat: no-repeat;
+            size: cover;
+        }
+        align-self: center;
+    }
+
+    &:nth-child(3)
+    {
+        grid-column: 1 / span 2 ;
+        grid-row: 2;
+        justify-self: first baseline;
+        background: {
+            image: url(../../img/banner/b7.jpg);
+            size: cover;
+            position: right;
+        } 
+    }
+
+    &:nth-child(4)
+    {
+        grid-column: 2 / span 2 ;
+        grid-row: 2;
+        background: {
+            image: url(../../img/banner/b4.jpg);
+            size: cover;
+            position: right;
+        } 
+    }
+
+    &:nth-child(5)
+    {
+        grid-column: 3 / span 2 ;
+        grid-row: 2;
+        justify-self: last baseline;
+        background: {
+            image: url(../../img/banner/b18.jpg);
+            size: cover;
+            position: right;
+        } 
+    }
+}
+
+.newsletter
+{
+    @include makeFlex(row,4,1);
+    color: aliceblue;
+    padding: calc(var(--base-padding) * 4);
+
+    background: {
+        color: #041E42;
+        image: url(../../img/banner/b14.png);
+        repeat: no-repeat;
+        position: 30% 40%;
+    };
+
+    &>*
+    {
+        width: 100%;
+        padding: var(--base-padding);
+    }
+
+    .form
+    {
+        @include makeFlex(row,1,1,0,wrap);
+
+        &>*
+        {
+            padding-block: calc(var(--base-padding) * 1.2);
+            font-weight: 900;
+            font-size: var(--huge-fs);
+            color: var(--text-title);
+            @include makeBorder(0,solid,.1rem,transparent,0rem);
+            outline: none;
+        }
+        input 
+        {
+            padding-inline-start: calc(var(--base-padding) * 2);
+            flex-grow: 1;
+            flex-shrink: .5;
+            border: {
+                top-left-radius: .6rem;
+                bottom-left-radius : .6rem;
+            }    
+
+        }
+
+        button 
+        {
+            flex-grow: .25;
+            flex-shrink: none;
+            color: aliceblue;
+            background-color: map-get($neon-candy, 'candy-blue');
+            cursor: pointer;
+            border: {
+                top-right-radius: .6rem;
+                bottom-right-radius : .6rem;
+            }
+            transition: all 10ms ease-in-out;
+
+            &:hover
+            {
+                color: map-get($neon-candy, 'candy-blue');
+                background-color: aliceblue;
+                transform: scale(.95);
+            }
+        }
+    }
+
+}
+
+@media screen and (width < 1000px)
+{
+    #banners-area { display: none; }
+}
+
+@media screen and (width < 768px)
+{
+    .newsletter { flex-direction: column; }
+
+};

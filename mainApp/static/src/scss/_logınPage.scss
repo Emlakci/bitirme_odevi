@@ -1,0 +1,163 @@
+.form-box
+{
+    //? variables ?//
+    $base-color: map-get($neon-colors, 'neon-blue');
+    $secondary-color: map-get($transparent-colors, 'rich-black');
+    $text-color: map-get($text-colors, 'skobelof');
+    $text-color-warn: map-get($neon-colors, 'neon-yellow');
+    $input-h   : calc(5rem * var(--scale-factor));
+    $transition-inp : .7s;
+    $transition-delay : .5s;
+    $glass-color-black: map-get($transparent-colors, 'black-glass'); 
+    $glass-color-white-1: map-get($transparent-colors, 'white-glass'); 
+    $glass-color-white-2: map-get($transparent-colors, 'white-glass-2'); 
+    $glass-color-white-3: map-get($transparent-colors, 'white-glass-3');
+    //? variables ?//
+
+    grid-column: 2 / 12;
+    
+    align-self: center;
+    justify-self: center;
+    // border: 1px solid $text-color;
+    border-radius: 1rem;
+    width: 100%;
+    @include makeFlex(column,1,1,0rem);
+    @include makeBorder(0,solid,.1rem,$text-color);
+    @include d-3BoxShadow();
+ 
+    .form
+    {
+        width: 100%;
+        justify-self: center;
+        align-self: center;
+        @include makeFlex(column,auto,1,0rem);
+
+        .input-box
+        {
+            position: relative;
+            width: 100%;
+            max-width: 32rem;
+            height: $input-h;
+            margin-block: calc($input-h / 2);
+
+            font-size: var(--large-fs);
+            color: $text-color;
+
+            & > *
+            {
+                transition: all $transition-inp;
+                font-size: var(--huge-fs);
+            }
+
+            .inp
+            {
+                width: 100%;
+                height: 100%;
+                background: transparent;
+                border: none;
+                outline: none;
+                border-bottom: .2rem solid $text-color;
+                font-weight: 500;
+                padding-inline: calc(var(--base-padding) * 2);
+                
+
+                &:focus,
+                &:valid
+                {
+                    border-bottom-color: $base-color;
+                }
+                &:focus~.label,
+                &:valid~.label
+                {
+                    top: -.5rem;
+                    color: $base-color;
+                }
+                &:focus~.form-icon,
+                &:valid~.form-icon
+                {
+                    color: $base-color;
+                }
+            }
+
+            .label
+            {
+                position: absolute;
+                left: 0;
+                @include centerElement((center,null));
+                pointer-events: none;
+            }
+
+            .form-icon
+            {
+                position: absolute;
+                right: 0;
+                @include centerElement((center,null));
+            }
+        }
+
+        .btn
+        {
+            position: relative;
+            width: 100%;
+            max-width: 32rem;
+            height: calc($input-h - .5rem);
+            min-height: 4rem;
+            background: transparent;
+            border: {
+                width: .2rem;
+                style: solid;
+                color: $base-color;
+                radius: calc($input-h - 1rem);
+            }
+            outline: none;
+            font-weight: 600;
+            color: #fff;
+            font-size: var(--bigger-fs);
+            cursor: pointer;
+            overflow: hidden;
+            z-index: 1;
+
+            &::before
+            {
+                content: '';
+                position: absolute;
+                top: -100%;
+                left: 0;
+                width: 100%;
+                height: 250%;
+                background: linear-gradient($secondary-color, $base-color, $secondary-color, $base-color);
+                transition: all $transition-inp;
+                z-index: -1;
+            }
+
+            &:hover::before
+            {
+                top: 0;
+            }
+        }
+
+        .logreg-link
+        {
+            @include makeFlex(column,1,1,0);
+            color: $text-color;
+            font-size: var(--small-fs);
+            text-align: center;
+            margin: 2rem 0 1rem;
+
+            p > a {
+                color: $base-color;
+                text-decoration: none;
+                font-weight: 600;
+
+                &:hover
+                {
+                    text-decoration: underline;
+                }
+
+            }
+        }
+    }
+
+   
+
+}

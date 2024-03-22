@@ -1,0 +1,342 @@
+#contact-form-area
+{
+    //? variables ?//
+    $contact-form-w : 95rem;
+    $contact-form-h : calc($contact-form-w / 2);
+    $scale-factor : 1;
+    $base-color: map-get($neon-candy, 'candy-purple');
+    $secondary-color: map-get($neon-candy, 'candy-blue');
+    $text-color: map-get($transparent-colors, 'text-color-clr');
+    $glass-color-black: map-get($transparent-colors, 'black-glass'); 
+    $glass-color-white-3: map-get($transparent-colors, 'white-glass-3'); 
+    //? variables ?//
+    //~local Func ~//
+    @mixin changeElement_W-H($scale,$cons-width,$cons-height)
+    {
+        $scale-factor : $scale;
+        width: calc($cons-width * $scale-factor);
+        height: calc($cons-height * $scale-factor);
+    }
+    //~local Func ~//
+
+    grid-column: 2 / 12;
+
+    position: relative;
+    display: flex;
+    justify-self: center;
+    @include changeElement_W-H(1,$contact-form-w,$contact-form-h);
+    @include makeBorder(0,solid,.05rem,$secondary-color);
+
+
+    .contact-info
+    {
+        position: absolute;
+        top: 10%;
+        @include makeFlex(column,5,1,0);
+        width: 30%;
+        height: 80%;
+        background: $base-color;
+        z-index: 1;
+        padding: 4rem;
+        box-shadow: 0 2rem 2.5rem $glass-color-black;
+
+        .title 
+        {
+            .text
+            {
+                color:$text-color;
+                text-transform: uppercase;
+                font-size: var(--large-fs);
+                text-align: center;
+            }
+
+            .info
+            {
+                position: relative;
+                margin-block: 2rem;
+                font-size: var(--large-fs); 
+
+                .info-list
+                {
+                    position: relative;
+                    list-style: none;
+                    @include makeFlex(row,null,2,0);
+                    margin-block: 2rem;
+
+                    .icon
+                    {
+                        width: 5rem;
+                        min-width: 5rem;
+                        
+                        img 
+                        {
+                            max-width: 100%;
+                            filter: invert(1);
+                        }
+                    }
+
+                    .text-info
+                    {
+                        margin-left: 1rem;
+                        color: $text-color;
+                    }
+                }
+            }
+        }
+    }
+
+    .contact-form
+    {
+        position: absolute;
+        padding-block: calc($contact-form-w * .073);
+        padding-inline: calc($contact-form-w * .053);
+        margin-left: calc($contact-form-w * .157);
+        width: calc(100% - calc($contact-form-w * .157));
+        height: 100%;
+        background: rgb(232, 225, 225);
+
+        .text
+        {
+            margin-left: 10rem;
+            color: $base-color;
+            font-size: var(--huge-fs);
+            font-weight: 700;
+        }
+
+        .contactForm
+        {
+            position: relative;
+            @include makeFlex(row,5,null,0,wrap);
+            margin-left:calc($contact-form-w * .105);
+            padding-top: calc($contact-form-w * .031);
+            z-index: 1000;
+
+            .inputBox
+            {
+                position: relative;
+                margin-bottom: calc($contact-form-w * .037);
+
+                &.w50
+                {
+                    width: 47%;
+                }
+                
+                &.w100
+                {
+                    width: 100%;
+                }
+
+                input,
+                textarea
+                {
+                    width: 100%;
+                    resize: none;
+                    padding-block: .5rem;
+                    font-size: var(--large-fs);
+                    border: none;
+                    outline: none;
+                    @include makeBorder(3,solid,.1rem,$secondary-color);
+                    background: transparent;
+
+                    &:focus ~ span,
+                    &:valid ~ span
+                    {
+                        transform: translateY(-2rem);
+                        font-size: var(--large-fs);
+                        letter-spacing: .1rem;
+                        color: map-get($neon-colors, 'neon-pink');
+                    }
+                }
+                
+                input[type="submit"]
+                {
+                    position: relative;
+                    max-width: calc($contact-form-w * .105);
+                    font-weight: 700;
+                    padding: 1.2rem;
+                    color: $base-color;
+                    background: $text-color;
+                    @include makeBorder(0,solid,.2rem,$base-color);
+                    cursor: pointer;
+                    transition: all .3s ease-in-out;
+
+                    &:hover
+                    {
+                        background: rgba($base-color, .6);
+                        color: #fff;
+                        transform: scale(.95);
+                        @include makeBorder(0,solid,.1rem,#fff);
+                    }
+                }
+
+                textarea
+                {
+                    height: 5rem;
+                }
+
+                .inp-label
+                {
+                    position: absolute;
+                    left: 0;
+                    padding-inline: .5rem;
+                    pointer-events: none;
+                    font-size: var(--large-fs);
+                    transition: all .5s ease-in-out;
+                }
+
+            }
+        }
+    }
+
+    //+ MEDIA QUERIES +//
+    @media screen and (1175px < width <= 1300px)
+    {
+        @include changeElement_W-H(.9,$contact-form-w,$contact-form-h);
+    }
+    @media screen and (1050px < width <= 1175px)
+    {
+        @include changeElement_W-H(.8,$contact-form-w,$contact-form-h);
+
+        .contact-info
+        {
+            top: 0;
+            width: 35%;
+            height: 100%;
+            
+            .title
+            {
+                @include makeFlex(column,1,1,0);
+                width: 100%;
+
+            }
+        }
+    }
+    @media screen and (768px < width <= 1050px)
+    {
+        width: 100%;
+        height: 100%;
+        flex-direction: column-reverse;
+
+        .contact-info
+        {
+            position: relative;
+            flex-direction: row;
+            top: 0;
+            width: 100%;
+            height: auto;
+
+            .title
+            {
+                @include makeFlex(column,1,1,0);
+                width: 100%;
+                
+                .info
+                {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                    font-size: 1.4rem;
+                    margin: 0;
+
+                    .info-list
+                    {
+                        flex-wrap: wrap;
+                        margin-block: 0;
+                    }
+
+                }
+            }
+        }
+
+        .contact-form
+        {
+            position: relative;
+            width: 100%;;
+            height: 100%;
+            top: 0rem;
+            padding: 2rem 0;
+            margin-left: 0;
+            
+            .contactForm
+            {
+                margin-inline: auto;
+
+                .inputBox
+                {
+                    margin-bottom: 3rem;
+                    textarea 
+                    {
+                        height: 8rem;
+                    }
+                }
+            }
+        }
+    }
+    @media screen and (width <= 768px)
+    {
+        width: 100%;
+        height: 100%;
+        flex-direction: column-reverse;
+
+        .contact-info
+        {
+            position: relative;
+            flex-direction: row;
+            top: 0;
+            width: 100%;
+            height: auto;
+
+            .title
+            {
+                @include makeFlex(column,1,1,0);
+                width: 100%;
+                
+                .info
+                {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                    font-size: var(--medium-fs);
+                    margin: 0;
+
+                    .info-list
+                    {
+                        flex-wrap: wrap;
+                        margin-block: 0;
+                        .icon
+                        {
+                            width: 3rem;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        .contact-form
+        {
+            position: relative;
+            width: 100%;;
+            height: 100%;
+            top: 0rem;
+            padding: 2rem 0;
+            margin-left: 0;
+            
+            .contactForm
+            {
+                @include makeFlex(row,4,1,0,wrap);
+                margin-inline: auto;
+
+                .inputBox
+                {
+                    min-width: 20rem;
+                    margin-bottom: 3rem;
+                    textarea 
+                    {
+                        height: 8rem;
+                    }
+                }
+            }
+        }
+    }
+}

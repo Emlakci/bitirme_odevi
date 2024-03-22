@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+    <main id="content">
+
+        <!-- PRODUCT-DETAIL PAGE START -->
+        <!-- product info section start -->
+        <section id="p-details" class="product-detail">
+            <!-- product img area start -->
+            <div class="p-img-area">
+                <img class="p-img big" src="{{product.p_img_1.url}}" alt="" id="p-main-img">
+                <div class="small-img-group">
+
+                    {% for key in img_src %}
+                        {% with key|stringformat:"s" as path %}
+                            {% with "/media/"|add:path as src %}
+                                <div class="small-img-area">
+                                    <img class="p-img small" src="{{ src }}" alt="">
+                                </div>
+                            {% endwith %} 
+                        {% endwith %}
+                    {% endfor %}
+  
+                </div>
+            </div>
+            <!-- product img area end -->
+            <!-- product info area start -->
+            <div class="product-infos">
+                <h6 class="info-text">Home / {{ product.p_category }}</h6>
+                <h4>{{ product.p_name }}</h4>
+                <h3 class="price-tag">{{ product.p_price }}&#8378</h3>
+                <select name="select-size" title="Beden Seciniz" id="size-select">
+                    <option value="0" selected>Beden</option>
+                    {% for size in p_size %}
+                        {% with i=forloop.counter %}
+                            <option value="{{ i }}">{{ size }}</option>
+                        {% endwith %}
+                    {% endfor %}
+                </select>
+                <input type="number" value="1" name="purchase-amount" title="Adet Giriniz">
+                <button type="button">Sepete Ekle</button>
+                <h4>Urun Detayi</h4>
+                <p>{{ product.p_information }}</p>
+            </div>
+            <!-- product info area end -->
+        </section>
+        <!-- product info section end -->
+        <!-- similar product shown area start -->
+        <section id="product" class="full-page details">
+            <h2>Benzer Urunler</h2>
+            <p>Bunlar da ilginizi cekebilir</p>
+            <div class="product-container">
+                {% for product in same_product  %}
+                <div class="product-card" data-p-id="{{ product.id }}">
+                    <img class="product-img" src="{{ product.p_img_1.url }}" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">{{ product.p_brand }}</span>
+                        <h5 class="product-name info-text">{{ product.p_name }}</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">{{ product.p_price }} &#8378</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>  
+                {% endfor %}
+
+
+
+                <!-- <div class="product-card">
+                    <img class="product-img" src="./img/products/f2.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img class="product-img" src="./img/products/f3.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img class="product-img" src="./img/products/f4.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img class="product-img" src="./img/products/f5.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img class="product-img" src="./img/products/f6.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img class="product-img" src="./img/products/f7.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img class="product-img" src="./img/products/f8.jpg" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">adidas</span>
+                        <h5 class="product-name info-text">Cartoon Astronaut T-Shirts</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">$78</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>    -->
+            </div>
+        </section>
+        <!-- similar product shown area end -->
+        <!-- comments area start -->
+        <section id="comments-area" class="comments details">
+            <h2 class="comment-title">Degerlendirmeler</h2>
+            <form  method="POST" id="comment">
+                <img class="p-img" src="/img/avatar.png" alt="">
+                <div class="input">
+                    <textarea class="input w100" name="comment" rows="5" maxlength="250" placeholder="Bir seyler yaz..."></textarea>
+                    <button class="input w50" type="submit">GONDER</button>
+                </div>
+            </form>
+            <div style="min-width: 100%;" class="user-comments">
+                <p class="posts">{{ post.comment }}<br><small class="text-date">{{ post.user.username }}-{{ post.city }}-{{ post.time_stamp }}</small></p>         
+            </div>
+        </section>
+        <!-- comments area end -->
+        <!-- newsletter form start -->
+        <section id="shopping-newsletter" class="newsletter details">
+            <div class="newstext">
+                <h4>Haberdar Olmak icin Kayit Ol!</h4>
+                <p>Supriz indirmler ve size ozel teklifleri E-posta olarak alin...</p>
+            </div>
+            <form id="newsletter-form" action="" class="form">
+                    <input type="email" name="email" id="email" placeholder="E-posta adresinizi yazin ">
+                    <button type="button">GONDER</button>
+                </form>
+        </section>
+        <!-- newsletter form end -->
+        <!-- PRODUCT-DETAIL PAGE END -->
+
+    </main>
+{% endblock body %}
+    
+  
+                    <!-- <div class="small-img-area">
+                        <img class="p-img small" src="./img/products//f2.jpg" alt="">
+                    </div>
+                    <div class="small-img-area">
+                        <img class="p-img small" src="./img/products/f3.jpg" alt="">
+                    </div>
+                    <div class="small-img-area">
+                        <img class="p-img small" src="./img/products/f4.jpg" alt="">
+                    </div> -->
+
+<!-- 
+                    {% if img_field_state.i %}
+                            <div class="small-img-area">
+                                <img class="p-img small" src="{{ product.p_img_|add:i.url}}" alt="">
+                                <p>{{ product.img_fields.i.url }}</p>
+                            </div>
+                        {% endif %}   -->

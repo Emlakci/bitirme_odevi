@@ -1,0 +1,50 @@
+main
+{
+    //+ local variables +//
+    $scale-factor : 1.5;
+    $skobelof-color : map-get($text-colors, 'skobelof');
+    $card-border-clr : rgb(black,.2);
+    $card-border-clr-2 : rgb(black,.5);
+    $card-border-clr-3 : rgb(black,.1);
+    $card-border-rds : 1rem;
+    $card-padding : calc(var(--base-padding) / 2);
+    //+ local variables +//
+
+    h1{font-size: calc(var(--xxgiant-fs) * $scale-factor );}
+    h2{font-size: calc(var(--giant-fs) * $scale-factor );}
+    h3{font-size: calc(var(--big-fs) * $scale-factor );}
+    h4{font-size: calc(var(--huge-fs) * $scale-factor );}
+    p{font-size: var(--large-fs);}
+    small{font-size: var(--medium-fs);}
+    
+    @include placeItemInGrid(main,2,2);
+    width: 100%;
+
+    @include makeGrid(12,(0,calc(100% / 12)),var(--base-padding),null,null,null);
+
+    //+ home page content +//
+    @import 'homePage';
+    //+ home page content +//
+ 
+    //+ shopping page content +//
+    @import 'shoppingPage';
+    //+ shopping page content +//
+    
+    //+ product details page content +//
+    @import 'productDetails';
+    //+ product details page content +//
+
+    //+ contact page content +//
+    @import 'contactPage';
+    //+ contact page content +//
+
+    //+ about page content +//
+    @import 'aboutPage';
+    //+ about page content +//
+    
+    //+ login page content +//
+    @import 'logınPage';
+    //+ login page content +//
+
+
+}

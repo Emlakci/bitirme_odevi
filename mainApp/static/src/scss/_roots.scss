@@ -1,0 +1,80 @@
+:root
+{
+    //~ Local Functions #//
+    @mixin calcFontSize($startValue, $increaseFactor, $multiplyFactor)
+    {
+        $value : calc($startValue * $multiplyFactor);
+
+        $size-name :
+        (
+            xsmall-fs,
+            small-fs, 
+            medium-fs, 
+            large-fs,
+            huge-fs,
+            xhuge-fs,
+            big-fs,
+            bigger-fs,
+            giant-fs, 
+            xgiant-fs, 
+            xxgiant-fs 
+        );
+
+
+        @each $size in $size-name
+        {
+            --#{$size}: #{$value}rem;
+
+            $value: $value + $increaseFactor;
+        }
+
+    };
+    //~ Local Functions #//
+    //? Backgrounds & Colors
+    --main-color     : #FFFEFF;
+    --secondary-color: #011EFE;
+    --shadow-1       : #0F1F2E;
+    --shadow-2       : #19324D;
+    --text-main      : #33FFFF;
+    --text-title     : #000;
+    --text-detail    : #9E0059;
+    
+    //? Backgrounds & Colors
+    //? Font Sizes
+    @include calcFontSize(1,0.25,1);
+
+
+    //? Font Sizes
+    //? Area Sizes
+    --scale-factor : 1;
+    --base-w       : calc(10rem * var(--scale-factor)); // 100px
+    --base-h       : calc(10rem * var(--scale-factor)); // 100px
+    --base-dvh     : calc(10dvh * var(--scale-factor)); // 10dvh
+    --base-gap     : calc(1rem * var(--scale-factor)); // 10px
+    --base-padding : calc(1rem * var(--scale-factor)); // 10px
+    //? Area Sizes
+
+
+    //+ MEDIA QUERIES +//
+    @media screen and (max-width : 768px) 
+    {
+        //? Font Sizes
+        @include calcFontSize(1,.25,.8);
+        //? Font Sizes
+        //? Area Sizes
+        --scale-factor : 0.5;
+        //? Area Sizes
+    }  
+}
+
+
+
+
+
+
+
+
+
+//* MEDIA QUERIES -BREAK POINTS- FOR PAGE
+
+//* MEDIA QUERIES -BREAK POINTS- FOR PAGE

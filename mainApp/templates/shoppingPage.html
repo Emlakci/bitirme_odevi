@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+    <main>
+    
+        <!-- SHOPPINGPAGE START -->
+        <!-- page-header start -->
+        <section id="shopping-header" class="shop-header">
+            <h1>#Ya$asin Kapitalizm...</h1>
+            <p>Bol Bol tuket ki hemen tukenesin...</p>
+        </section>
+        <!-- page-header end -->
+        <!-- products' list start -->
+        <section id="product-list" class="full-page">
+            <div class="product-container">
+                {% for product in product  %}
+                <div class="product-card" data-p-id="{{ product.id }}">
+                    <img class="product-img" src="{{ product.p_img_1.url }}" alt="">
+                    <div class="product-content">
+                        <span class="brand main-title">{{ product.p_brand }}</span>
+                        <h5 class="product-name info-text">{{ product.p_name }}</h5>
+                        <div class="product-rate sub-title">
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                            <i class="fa-regular fa-star"></i>  
+                        </div>
+                        <div class="add-chart sub-title">
+                            <h5 class="product-price main-title">{{ product.p_price }} &#8378</h5>
+                            <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        <!-- products' list end -->
+        <!-- page selector start -->
+        <section id="paging" class="page-number">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#"><i class="fa-solid fa-arrow-right"></i></a>
+        </section>
+        <!-- page selector end -->
+        <!-- newsletter form start -->
+        <section id="shopping-newsletter" class="newsletter">
+            <div class="newstext">
+                <h4>Haberdar Olmak icin Kayit Ol!</h4>
+                <p>Supriz indirmler ve size ozel teklifleri E-posta olarak alin...</p>
+            </div>
+            <form id="newsletter-form" action="" class="form">
+                    <input type="email" name="email" id="email" placeholder="E-posta adresinizi yazin ">
+                    <button type="button">GONDER</button>
+                </form>
+        </section>
+        <!-- newsletter form end -->
+        <!-- SHOPPINGPAGE END -->
+
+    </main> 
+{% endblock body %}

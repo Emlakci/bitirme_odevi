@@ -1,0 +1,61 @@
+#shopping-header
+{
+    grid-column: 1 / -1;
+    grid-row: 1;
+}
+
+#product-list
+{
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+#paging
+{
+    grid-column: 2 / 12;
+    grid-row: 3;
+}
+
+#shopping-newsletter
+{
+    grid-column: 1 / -1;
+    grid-row: 4;
+}
+
+
+
+.shop-header
+{
+    @include makeFlex(column,1,1,1);
+    min-height: calc(var(--base-dvh) * 4);
+    background: {
+        image: url(../../img/banner/b1.jpg);
+        size: cover;
+        position: center;
+    }
+
+    text-align: center;
+    color: rgba(aliceblue, .6);
+}
+
+.page-number
+{
+    @include makeFlex(row,1,1,.5rem);
+    
+    &>*
+    {
+        background-color: map-get($text-colors, 'skobelof');
+        padding-inline: calc(var(--base-padding) * 2);
+        padding-block: calc(var(--base-padding) * 1.5);
+        font-weight: 600;
+        font-size: var(--large-fs);
+        border-radius: .4rem;
+        color: rgba(aliceblue, 0.5);
+
+        &:hover
+        {
+            color: rgba(aliceblue, 1);
+        }
+    }
+
+}

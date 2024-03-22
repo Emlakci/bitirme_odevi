@@ -1,0 +1,130 @@
+footer 
+{
+    @include placeItemInGrid(footer,1,1);
+    width: 100%;
+
+    background-color: map-get($navbar-colors, 'nav-bg-2');
+    font-size: var(--medium-fs);
+    color: whitesmoke;
+    padding: calc(var(--base-padding) * 2);
+
+    .container 
+    {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        &>*
+        {
+            flex: 1;
+            margin-right: calc(var(--base-padding) * 2);
+
+            h2 
+            {
+                color: map-get($transparent-colors, 'electric-blue');
+                margin-bottom: calc(var(--base-padding) * 1.5);
+            }
+        }
+        
+        .about
+        {
+            font-size: var(--large-fs);
+            .contact
+            {
+                span
+                {
+                    display: block;
+                    margin-bottom: calc(var(--base-padding));
+                    
+                    i 
+                    {
+                        margin-right: calc(var(--base-padding) / 2);
+                    }
+                }
+            }
+        }
+        .links
+        {
+            font-size: var(--medium-fs);
+            ul 
+            {
+                list-style: none;
+                padding: 0;
+
+                li 
+                {
+                    margin-bottom: 10px;
+
+                    a 
+                    {
+                        color: #fff;
+                        text-decoration: none;
+                        font-size: var(--large-fs);
+                        transition: all 5ms ease-in-out;
+
+                        &:hover
+                        {
+                            background: map-get($transparent-colors, 'electric-blue');
+                            text-decoration: underline;
+
+                        }
+                    }
+                }
+            }
+        }
+
+        .contact-form
+        {
+            .text-input
+            {
+                width: 100%;
+                padding: var(--base-padding);
+                margin-bottom: var(--base-padding);
+                font-size: var(--large-fs);
+            }
+
+            .btn
+            {
+                padding: var(--base-padding) calc(var(--base-padding) * 2);
+                background-color: #ff6600;
+                border: none;
+                color: #fff;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .footer-bottom 
+    {
+        background-color: #222;
+        padding: var(--base-padding) 0;
+        text-align: center;
+        color: #fff;
+        font-size: var(--large-fs);
+    }
+
+    @media screen and (width <= 768px) 
+    {
+        .container
+        {
+            flex-direction: column;
+
+            &>*
+            {
+                width: 75%;
+                justify-self: center;
+                align-self: center;
+                h2 { align-self: first baseline; }
+            }
+
+            .links
+            {
+                ul
+                {
+                    @include makeFlex(row,4,1,2rem);
+                }
+            }
+            
+        }    
+    }
+}
