@@ -1,1 +1,62 @@
-<h1>Account Page</h1>
+{% extends 'base.html' %}
+{% load static %}
+<head>
+    <!-- ionicons icons scripts -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- ionicons icons scripts -->
+</head>
+
+
+{% block body %}
+    <main id="content">
+
+        <div class="container">
+            <h2>HESAP BİLGİERİM</h2>
+            <div class="wrapper">
+                <div class="input-box">
+                    <input class="inp" type="text" name="first-name" disabled>
+                    <span class="label">Ad</span>
+                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                </div>
+                <div class="input-box">
+                    <input class="inp" type="text" name="last-name" disabled>
+                    <span class="label">Soyad</span>
+                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                </div>
+                <div class="input-box">
+                    <input class="inp" type="text" name="username" disabled>
+                    <span class="label">Kullanici Adi</span>
+                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                </div>
+                <div class="input-box">
+                    <input class="inp" type="email" name="email" disabled>
+                    <span class="label">E-Posta</span>
+                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                </div>
+                <div class="input-box">
+                    <input class="inp" type="date" name="birth-date" disabled>
+                    <span class="label">E-Posta</span>
+                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                </div>
+                <div class="input-box">
+                    <input class="inp" type="email" name="email" disabled>
+                    <span class="label">E-Posta</span>
+                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                </div>
+                <div class="input-box">
+                    <input class="inp" type="text" name="city" disabled>
+                    <span class="label">Sehir</span>
+                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                </div>
+                <div class="input-box">
+                    <input class="inp" type="file" name="profile-img" disabled hidden>
+                    <span class="label">Profil Resmi</span>
+                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                </div>
+            </div>
+        </div>
+
+    </main>
+{% endblock body %}
+    

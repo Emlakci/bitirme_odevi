@@ -1,0 +1,83 @@
+.container
+{
+    //? variables ?//
+    $base-color: map-get($neon-colors, 'neon-blue');
+    $secondary-color: map-get($transparent-colors, 'rich-black');
+    $text-color: map-get($text-colors, 'skobelof');
+    $text-color-warn: map-get($neon-colors, 'neon-yellow');
+    $input-h   : calc(5rem * var(--scale-factor));
+    $transition-inp : .7s;
+    $transition-delay : .5s;
+    $glass-color-black: map-get($transparent-colors, 'black-glass'); 
+    $glass-color-white-1: map-get($transparent-colors, 'white-glass'); 
+    $glass-color-white-2: map-get($transparent-colors, 'white-glass-2'); 
+    $glass-color-white-3: map-get($transparent-colors, 'white-glass-3');
+    //? variables ?//
+
+    border: 2px solid red;
+
+    grid-column: 2/12;
+
+    padding: var(--base-padding);
+
+    @include d-3BoxShadow();
+
+    .wrapper
+    {
+        // border: 2px solid green;
+        @include makeFlex(row,4,2,5rem,wrap);
+        margin-top: calc(var(--base-padding) * 4);
+        
+        .input-box
+        {
+            // border: 1px solid red;
+            
+            position: relative;
+            width: min(100%, 25rem);
+            max-width: 40rem;
+            min-height: calc($input-h + 1rem);
+            max-height: calc(5rem* var(--scale-factor));
+            flex-grow: 1;
+
+            .inp
+            {
+                width: 100%;
+                height: $input-h;
+                min-height: calc($input-h + .5rem);
+                @include makeBorder(0,solid,.1rem,rgb(black,.3),.5rem);
+                outline: none;
+                padding-inline:calc(var(--base-padding) *2.5);
+                padding-block:calc(var(--base-padding) *2);
+                font-size: var(--big-fs);
+                font-weight: 700;
+                color: $base-color;
+            }
+
+            .label
+            {
+                position: absolute;
+                left: var(--base-padding);
+                top:-50%;
+                font-size: var(--large-fs);
+            }
+
+            .form-icon
+            {
+                position: absolute;
+                right: var(--base-padding);
+                @include centerElement((center,null));
+                font-size: var(--huge-fs);
+                cursor: pointer;
+                transition: all $transition-inp ease-in-out;
+
+                &:hover
+                {
+                    scale:(1.2);
+                    color: $base-color;
+                }
+            }
+        }
+    }
+
+
+}

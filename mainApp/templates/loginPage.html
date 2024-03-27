@@ -22,6 +22,13 @@
          <!-- login-form area start -->
          <div class="form-box login">
             <h2 class="title">Login</h2>
+
+            <!-- message box -->
+            {% for message in  messages %}
+                <p class=""> {{ i }} {{ i.tag }} </p>
+            {% endfor %}
+            <!-- message box -->
+
             <form id="login" class="form enter" novalidate>
                 <div class="input-box">
                     <input class="inp" type="text" name="username" required>
@@ -42,8 +49,11 @@
         </div>
         <!-- login-form area end -->
     </main>
-
-
-    
+    <!-- script -->
+    <script>
+        var csrfToken = "{{ csrf_token }}";
+    </script>
+    <script type="module" src="{% static '/src/js/formSubmitHandler.js' %}"></script>
+<!-- script --> 
 </body>
 </html>

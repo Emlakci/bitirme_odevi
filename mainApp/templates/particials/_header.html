@@ -12,13 +12,66 @@
             <li class="action-links"><a class="page-links" href="/categories">kategoriler</a></li>
             <li class="action-links"><a class="page-links" href="/about">hakkimizda</a></li>
         </ul>
+        
+        {% if request.user.is_authenticated %}
+            
+            {% if request.user.customuser.profile_img %}
+                <div id="avatar">
+                    <img src="{{ user.customuser.profile_img.url }}" alt="" id="person-img" class="account-img">
+                    <div class="person-menu" id="person-menu">
+                        <ul class="person-menu-link">
+                            <li><a href="{% url 'accountPage' %}">Kişisel Bilgilerim</a></li>
+                            <li><a href="{% url 'logout' %}">Güvenli Çıkış</a></li>
+                        </ul>
+                    </div>  
+                </div>
+                {% else %}
+                <div id="avatar">
+                    <img src="{% static '/img/avatar.png' %}" alt="" id="person-img" class="account-img">
+                    <div class="person-menu" id="person-menu">
+                        <ul class="person-menu-link">
+                            <li><a href="{% url 'accountPage' %}">Kişisel Bilgilerim</a></li>
+                            <li><a href="{% url 'logout' %}">Güvenli Çıkış</a></li>
+                        </ul>
+                    </div>  
+                </div>
+            {% endif %}
+        
+        {% else %}
+        
         <div class="buttons">
             <a href="/login" class="button">oturum ac</a>
-            <a href=/"resgister" class="button">kayit ol</a>
+            <a href="/register" class="button">kayit ol</a>
         </div>
+
+        {% endif %}
+            
     </nav>
     <div id="hamburgerMenu" class="hamburgerMenu">
-        <i class="fa-solid fa-bars"></i>
+        
+        {% if request.user.is_authenticated %}
+
+            {% if request.user.customuser.profile_img %}
+                <i>
+                    <img src="{{ user.customuser.profile_img.url }}" alt="" srcset="">
+                </i>
+            {% else %}
+                <i class="fa-solid fa-bars"></i>
+            {% endif %}
+            
+            <div class="hmbrgr-div sub-title">
+                <ul class="hmbrgr-link">
+                    <li class="hmbrgr-action-link"><a href="/" class="hmbrgr-link">anasayfa</a></li>
+                    <li class="hmbrgr-action-link"><a href="/contact" class="hmbrgr-link">iletisim</a></li>
+                    <li class="hmbrgr-action-link"><a href="/categories" class="hmbrgr-link">kategoriler</a></li>
+                    <li class="hmbrgr-action-link"><a href="/about" class="hmbrgr-link">hakkimizda</a></li>
+                    <li><a href="{% url 'accountPage' %}">Kişisel Bilgilerim</a></li>
+                    <li><a href="{% url 'logout' %}">Güvenli Çıkış</a></li>
+                </ul>
+            </div>
+        {% else %}
+        
+        <i class="fa-solid fa-bars"></i>    
         <div class="hmbrgr-div sub-title">
             <ul class="hmbrgr-link">
                 <li class="hmbrgr-action-link"><a href="/" class="hmbrgr-link">anasayfa</a></li>
@@ -26,8 +79,11 @@
                 <li class="hmbrgr-action-link"><a href="/categories" class="hmbrgr-link">kategoriler</a></li>
                 <li class="hmbrgr-action-link"><a href="/about" class="hmbrgr-link">hakkimizda</a></li>
                 <li class="hmbrgr-action-link"><a href="/login" class="hmbrgr-link">oturum ac</a></li>
-                <li class="hmbrgr-action-link"><a href="/resgister" class="hmbrgr-link">kayit ol</a></li>
+                <li class="hmbrgr-action-link"><a href="/register" class="hmbrgr-link">kayit ol</a></li>
             </ul>
         </div>
+
+        {% endif %}
+
     </div>
 </header>

@@ -3,7 +3,7 @@ const product_areas = document.querySelectorAll('#product, #product-trend, #prod
 export function changeBrowserLocation()
 {
     product_areas.forEach((item)=>{
-        console.log(item)
+        // console.log(item)
         item.addEventListener('click', (event)=>{
             const element = event.target;
             const parent_element = element.parentElement;

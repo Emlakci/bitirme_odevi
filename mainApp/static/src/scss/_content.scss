@@ -19,6 +19,7 @@ main
     
     @include placeItemInGrid(main,2,2);
     width: 100%;
+    position: relative;
 
     @include makeGrid(12,(0,calc(100% / 12)),var(--base-padding),null,null,null);
 
@@ -43,8 +44,14 @@ main
     //+ about page content +//
     
     //+ login page content +//
-    @import 'logınPage';
+    @import 'loginPage';
     //+ login page content +//
-
-
+    
+    //+ msgBox content +//
+    @import 'msgBox';
+    //+ msgBox content +//
+    
+    //+ account page content +//
+    @import 'accountPage';
+    //+ account page content +//
 }

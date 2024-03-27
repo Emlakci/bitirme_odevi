@@ -15,6 +15,7 @@
     <!-- links icons ~ css stylesheet etc -->
 </head>
 <body class="black">
+    {% load static %}
 
     {% include './particials/onlyLogoNav.html' %} 
 
@@ -22,10 +23,12 @@
          <!-- register-form area start -->
          <div class="form-box register"> 
             <h2 class="title">Register</h2>
-
+            
+            <!-- message box -->
             {% for message in  messages %}
                 <p class=""> {{ i }} {{ i.tag }} </p>
             {% endfor %}
+            <!-- message box -->
             
             <form id="register" class="form record" novalidate>
                 <div class="input-box">
@@ -66,6 +69,11 @@
         </div>
         <!-- register-form area end -->
     </main>
-    
+    <!-- script -->
+    <script>
+        var csrfToken = "{{ csrf_token }}";
+    </script>
+    <script type="module" src="{% static '/src/js/formSubmitHandler.js' %}"></script>
+    <!-- script -->
 </body>
 </html>

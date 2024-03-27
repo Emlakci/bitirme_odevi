@@ -149,7 +149,7 @@
 }
 
 //? 3D box shadow
-@mixin d-3BoxShadow ($color: black,$border-radius:1rem)
+@mixin d-3BoxShadow ($color: black,$border-radius:1rem, $border-color: black)
 {
     box-shadow: rgba($color, 0.17) 0px -23px 25px 0px inset, 
                 rgba($color, 0.15) 0px -36px 30px 0px inset, 
@@ -160,4 +160,5 @@
                 rgba($color, 0.09) 0px 16px 8px, 
                 rgba($color, 0.09) 0px 32px 16px;
     border-radius: $border-radius;
+    border-color: $border-color;
 }

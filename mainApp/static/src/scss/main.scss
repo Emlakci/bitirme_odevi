@@ -9,6 +9,13 @@
 
 body
 {
+    //# Local Class #//
+    .passive
+    {
+        z-index: -1;
+    }
+    //# Local Class #//
+
     background: var(--main-bg);
     min-height: 200dvh;
     overflow-x: hidden;
@@ -33,11 +40,7 @@ body
     @import 'content';
     //+ Main +//
     
-    
-    
-    
     //+ footer +//
     @import 'footer';
     //+ footer +//
-
 }

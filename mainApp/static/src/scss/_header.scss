@@ -16,6 +16,57 @@ header
     {
         transform: translate(0, 0) !important;
     }
+
+    %hoverMenu
+    {
+        position: absolute;
+        top: 100%;
+        right: 0;
+
+        min-width: max-content;
+        min-height: 1rem;
+        width: calc(var(--base-w) * 1.5);
+
+        text-transform: capitalize;
+        transition: transform 1s ease-in-out;
+        transform: translate(120%, 25%);
+
+        @include makeBorderEach((.1rem,.1rem,.1rem,.1rem),(solid,solid,solid,solid),($glass-color-white-2,$glass-color-white-1,$glass-color-white-1,$glass-color-white-2),(1rem,1rem,1rem,1rem));
+        @include glassmorphismContent($glass-electric-blue, 5rem, (0,2.5rem,4.5rem,$glass-color-black));
+                
+        &>*>*
+        {   
+            padding-inline: var(--base-padding);
+            padding-bottom: calc( var(--base-padding) / 2);
+            font-weight: 900;
+                    
+            transition: all 10ms ease-in-out;
+
+            a
+            {
+                color: $text-color;
+            }
+
+            &:hover
+            {   
+                transform: scale(1.05) translateX(5%);
+                background: $glass-color-black;
+                a 
+                {
+                    color: #0F1F2E;
+                    @include makeBorder(3,solid,.2rem,#0F1F2E);
+                    padding-inline: calc(var(--base-padding) / 2);
+                }
+            }
+        }
+
+        &:hover
+        {
+            transform: translate(0px, 0px);
+        }
+
+        z-index: 100000;
+    }
     //# Local Class #//
 
     @include placeItemInGrid(header,1,1);
@@ -74,6 +125,39 @@ header
     
         }
 
+        #avatar
+        {
+            position: relative;
+            flex-grow: .5;
+            width: 10%;
+            @include makeFlex(row,1,1,calc(var(--base-padding)));
+            font-size: var(--xhuge-fs);
+            height: var(--base-h);
+
+            .account-img
+            {
+                width: 50%;
+                cursor: pointer;
+                border: {
+                    radius: 100%;
+                    color: rgb(grey,.3);
+                    style: solid;
+                    width: .2rem;
+                };
+                transition: all .7s ease-in-out;
+
+                &:hover
+                {
+                    transform: scale(1.03);
+                }
+            }
+            
+            #person-menu
+            {
+                @extend %hoverMenu;
+            }
+        }
+            
     }
 
     .hamburgerMenu
@@ -95,48 +179,7 @@ header
 
         .hmbrgr-div
         {
-            position: absolute;
-            top: calc(100% + var(--base-padding));
-            right: 0;
-
-            min-width: max-content;
-            min-height: 1rem;
-            width: calc(var(--base-w) * 1.5);
-
-            padding-block: var(--base-padding);
-
-            text-transform: capitalize;
-            transition: transform 1s ease-in-out;
-            transform: translate(120%, 25%);
-
-            @include makeBorderEach((.1rem,.1rem,.1rem,.1rem),(solid,solid,solid,solid),($glass-color-white-2,$glass-color-white-1,$glass-color-white-1,$glass-color-white-2),(1rem,1rem,1rem,1rem));
-            @include glassmorphismContent($glass-electric-blue, 5rem, (0,2.5rem,4.5rem,$glass-color-black));
-
-            &>*>*
-            {   
-                padding-inline-start: var(--base-padding);
-                padding-bottom: calc( var(--base-padding) / 2);
-                font-weight: 900;
-                
-                transition: all 10ms ease-in-out;
-
-                a
-                {
-                    color: $text-color;
-                }
-
-                &:hover
-                {   
-                    transform: scale(1.05) translateX(5%);
-                    background: $glass-color-black;
-                    a 
-                    {
-                        color: #0F1F2E;
-                        @include makeBorder(3,solid,.2rem,#0F1F2E);
-                        padding-inline: calc(var(--base-padding) / 2);
-                    }
-                }
-            }
+            @extend %hoverMenu;
         }
     }
     
