@@ -1514,6 +1514,75 @@ body main .container .wrapper .input-box .form-icon:hover {
   scale: 1.2;
   color: #011EFE;
 }
+body main #modal {
+  border-width: 1rem;
+  border-style: solid;
+  border-color: rgba(8, 27, 41, 0.3);
+  border-radius: 0.5rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: max(25rem, 50%);
+  min-height: 10rem;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: white;
+  -webkit-backdrop-filter: blur(0.6rem);
+          backdrop-filter: blur(0.6rem);
+}
+body main #modal .form-area {
+  width: 100%;
+}
+body main #modal .form-area #update-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  padding: var(--base-padding);
+}
+body main #modal .form-area #update-form input {
+  width: max(20rem, 50%);
+  min-height: calc(5rem * var(--scale-factor));
+  font-size: var(--large-fs);
+  padding-inline-start: var(--base-padding);
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  border-radius: 1rem;
+  border-color: black;
+  outline: none;
+}
+body main #modal .btn-area {
+  width: max(25rem, 50%);
+  padding: var(--base-padding);
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+}
+body main #modal .btn-area button {
+  padding: calc(var(--base-padding) / 2);
+  border-width: 0.1rem;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.7);
+  border-radius: 0.5rem;
+  letter-spacing: 0.3rem;
+  font-size: var(--large-fs);
+  color: #088178;
+  cursor: pointer;
+  transition: all 0.7s ease-in-out;
+}
+body main #modal .btn-area button:hover[type=button] {
+  background-color: #FDFE02;
+  color: #011EFE;
+}
+body main #modal .btn-area button:hover {
+  transform: scale(0.9);
+}
 body footer {
   grid-area: footer;
   justify-self: center;

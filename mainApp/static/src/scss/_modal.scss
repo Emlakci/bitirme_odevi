@@ -1,0 +1,79 @@
+#modal
+{
+    //? variables ?//
+    $base-color: map-get($neon-colors, 'neon-blue');
+    $secondary-color: map-get($transparent-colors, 'rich-black');
+    $text-color: map-get($text-colors, 'skobelof');
+    $text-color-warn: map-get($neon-colors, 'neon-yellow');
+    $input-h   : calc(5rem * var(--scale-factor));
+    $transition-inp : .7s;
+    //? variables ?//
+
+    @include makeBorder(0,solid,1rem, $secondary-color,.5rem);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: max(25rem ,50%);
+    min-height: 10rem;
+    background: rgb(black, .5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+    backdrop-filter: blur(.6rem);
+
+    .form-area
+    {
+        width: 100%;
+
+        #update-form
+        {
+
+            @include makeFlex(column,1,1);
+            padding: var(--base-padding);
+
+            input
+            {
+                width: max(20rem ,50%);
+                min-height: $input-h;
+                font-size: var(--large-fs);
+                padding-inline-start: var(--base-padding);
+                @include d-3BoxShadow();
+                outline: none;
+            }
+        }
+    }
+    
+    .btn-area
+    {
+        width: max(25rem, 50%);
+        padding: var(--base-padding);
+        display: flex;
+        gap: 1rem;
+        justify-content: space-around;
+
+        button 
+        {
+            padding: calc(var(--base-padding) / 2);
+            @include makeBorder(0,solid,.1rem, rgb(black, .7),.5rem);
+            letter-spacing: .3rem;
+            font-size: var(--large-fs);
+            color: $text-color;
+            cursor: pointer;
+            transition: all $transition-inp ease-in-out;
+
+            &:hover[type="button"]
+            {
+                background-color: $text-color-warn;
+                color: $base-color;
+            }
+            &:hover
+            {
+                transform: scale(.9);
+            }
+        }
+    }
+}

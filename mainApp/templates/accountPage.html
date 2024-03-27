@@ -13,50 +13,62 @@
 
         <div class="container">
             <h2>HESAP BİLGİERİM</h2>
-            <div class="wrapper">
-                <div class="input-box">
-                    <input class="inp" type="text" name="first-name" disabled>
+            <div id="account-form" class="wrapper">
+                <div class="input-box" data-area-name="Isim Guncelleme">
+                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                    <input class="inp" type="text" name="first-name" data-text-content="Isim" disabled>
                     <span class="label">Ad</span>
-                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
                 </div>
-                <div class="input-box">
-                    <input class="inp" type="text" name="last-name" disabled>
+                <div class="input-box" data-area-name="Soyad Guncelleme">
+                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                    <input class="inp" type="text" name="last-name" data-text-content="Soy Isim" disabled>
                     <span class="label">Soyad</span>
-                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
                 </div>
-                <div class="input-box">
-                    <input class="inp" type="text" name="username" disabled>
+                <div class="input-box" data-area-name="Kullanici Adi Guncelleme">
+                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                    <input class="inp" type="text" name="username" data-text-content="Kullanici Adi" disabled>
                     <span class="label">Kullanici Adi</span>
-                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
                 </div>
-                <div class="input-box">
-                    <input class="inp" type="email" name="email" disabled>
+                <div class="input-box" data-area-name="E-mail Adresi Guncelleme">
+                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                    <input class="inp" type="email" name="email" data-text-content="E-Posta Adresi" disabled>
                     <span class="label">E-Posta</span>
+                </div>
+                <div class="input-box" data-area-name="Sifre Guncelleme">
                     <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                    <input class="inp" type="password" name="password" data-text-content="Sifre" disabled>
+                    <span class="label">Sifreniz</span>
+                </div>
+                <div class="input-box" data-area-name="Dogum Tarihi Guncelleme">
+                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                    <input class="inp" type="date" name="birth-date" data-text-content="Dogum Tarihi" disabled>
+                    <span class="label">Dogum Tarihiniz</span>
                 </div>
                 <div class="input-box">
-                    <input class="inp" type="date" name="birth-date" disabled>
-                    <span class="label">E-Posta</span>
-                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                    <input class="inp" type="number" name="age" disabled>
+                    <span class="label">Yasiniz</span>
                 </div>
-                <div class="input-box">
-                    <input class="inp" type="email" name="email" disabled>
-                    <span class="label">E-Posta</span>
+                <div class="input-box" data-area-name="Sehir Guncelleme">
                     <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
-                </div>
-                <div class="input-box">
-                    <input class="inp" type="text" name="city" disabled>
+                    <input class="inp" type="text" name="city" data-text-content="Sehir" disabled>
                     <span class="label">Sehir</span>
-                    <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
                 </div>
-                <div class="input-box">
-                    <input class="inp" type="file" name="profile-img" disabled hidden>
-                    <span class="label">Profil Resmi</span>
+                <div class="input-box" data-area-name="Profil Resmi Guncelleme">
                     <ion-icon class="form-icon" name="refresh-circle-outline"></ion-icon>
+                    <input class="inp" type="file" name="profile-img"  data-text-content="Profil Resmi" disabled hidden>
+                    <span class="label">Profil Resmi</span>
                 </div>
             </div>
         </div>
 
     </main>
 {% endblock body %}
-    
+
+{% block javaScript %}
+    <script>
+        var csrfToken = "{{ csrf_token }}"
+    </script>
+    <!-- cusctomized scripts -->        
+    <script src="{% static 'src/js/modal.js' %}"></script>
+    <!-- cusctomized scripts -->  
+{% endblock javaScript %}
