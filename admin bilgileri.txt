@@ -1,3 +1,3 @@
-Kullanıcı adı: ilker
+Kullanıcı adı: Ilker
 E-posta adresi: ilkeraslan06@gmail.com
-Password:123456 
+Password:Ilker123 
