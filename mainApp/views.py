@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import AnonymousUser
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from mainApp.models import *
 
 # Create your views here.
@@ -30,7 +33,7 @@ def productDetailsPage(request, p_id):
     request_product = Products.objects.get(id=p_id)
     p_size = request_product.p_sizes.all()
     same_category_product = Products.objects.filter(p_category=request_product.p_category).exclude(id=p_id) # don not get  request_product again
-
+    
     img_fields = ['p_img_1', 'p_img_2', 'p_img_3', 'p_img_4']
     img_src = []
 
@@ -42,13 +45,35 @@ def productDetailsPage(request, p_id):
             img_src.append(getattr(request_product, img_field))
         else:
             print(f"{img_field} alanı boş")
-  
     
+    try:
+        posts = ProductComments.objects.filter(product=p_id)
+        user = request.user
+
+        # comments
+        if request.method == 'POST':
+            # print(request.POST)
+            comment = request.POST.get('comment')
+            if comment: #textarea is not null
+                if not request.user.is_authenticated:
+                    user = AnonymousUser()
+
+                comment = ProductComments(product=request_product, comment=comment, user=request.user if request.user.is_authenticated else None)
+                comment.save()
+
+                #redirect to avoid resubmission of form
+                return HttpResponseRedirect(reverse('productDetails', args=(p_id)))
+    except Products.DoesNotExist:
+        request_product = None
+        posts = None
+            
     context ={
         'product': request_product,
         'img_src' : img_src,
         'p_size' : p_size,
         'same_product' : same_category_product,
+        'user' : user,
+        'posts' : posts,
     }
     
     return render(request,'productDetails.html', context)
@@ -72,6 +97,20 @@ def contactPage(request):
     context ={}
     return render(request,'contactPage.html', context)
 
-def categoryPage(request):
-    context ={}
+def categoryPage(request, category_slug):
+        
+    categories = Category.objects.all()
+    products = Products.objects.all()
+    
+    if category_slug != 'all':
+        print(category_slug)
+        category = Category.objects.get(category_name=category_slug)
+        products = Products.objects.filter(p_category=category)
+        print(products)
+
+    context = {
+        'categories' : categories,
+        'products' : products,
+    }
+
     return render(request,'categoryPage.html', context)

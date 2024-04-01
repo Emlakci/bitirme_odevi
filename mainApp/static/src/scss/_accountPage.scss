@@ -28,6 +28,11 @@
         @include makeFlex(row,4,2,5rem,wrap);
         margin-top: calc(var(--base-padding) * 4);
         
+        .p-img
+        {
+            max-height: fit-content !important;
+            @include makeBorder(0,solid,.1rem,rgb(black,.3),.5rem);
+        }
         .input-box
         {
             // border: 1px solid red;
@@ -75,6 +80,13 @@
                     scale:(1.2);
                     color: $base-color;
                 }
+            }
+
+            img
+            {
+                width: 25%;
+                border-radius: 50%;
+                padding: calc(var(--base-padding) / 2);
             }
         }
     }

@@ -1,1 +1,40 @@
-<h1>Kategori sayfasi</h1>
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block body %}
+    <main id="content">
+        <section id="categotyNav" class="navBar">
+            <ul>
+                {% for category in categories %}
+                <li><a href="{{ category }}" class="category-link"> {{ category }} </a></li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section id="product-list"  class="product-list">
+            <div class="product-container">
+                {% for product in products  %}
+                    <div class="product-card" data-p-id="{{ product.id }}">
+                        <img class="product-img" src="{{ product.p_img_1.url }}" alt="">
+                        <div class="product-content">
+                            <span class="brand main-title">{{ product.p_brand }}</span>
+                            <h5 class="product-name info-text">{{ product.p_name }}</h5>
+                            <div class="product-rate sub-title">
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>  
+                            </div>
+                            <div class="add-chart sub-title">
+                                <h5 class="product-price main-title">{{ product.p_price }} &#8378</h5>
+                                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock body %}
+    

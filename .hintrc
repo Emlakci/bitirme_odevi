@@ -21,7 +21,8 @@
       {
         "ignore": [
           "backdrop-filter",
-          "scale"
+          "scale",
+          "max-height: fit-content"
         ]
       }
     ],
@@ -29,6 +30,12 @@
       "default",
       {
         "duplicate-id": "off"
+      }
+    ],
+    "axe/structure": [
+      "default",
+      {
+        "list": "off"
       }
     ]
   }

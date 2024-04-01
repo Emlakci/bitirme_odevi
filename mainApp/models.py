@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -66,3 +67,23 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+#+ Product Comments Model
+class ProductComments(models.Model):
+    product = models.ForeignKey(Products, related_name='comments', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    comment = models.TextField('kullanici yorumu')
+    city = models.CharField('Sehir', null=True, blank=True, max_length=30)
+    time_stamp = models.DateTimeField('yorum kayit tarihi', auto_now_add=True)
+
+    def __str__(self):
+        if self.user:
+            return f'Comment by {self.user.username} on {self.product.p_name}/{self.product.id}'
+        else:
+            return f'Anonymous comment on {self.product.p_name}/{self.product.id}'
+
+    def save(self):
+        if not self.city and self.user and self.user.is_authenticated:
+            self.city = self.user.customuser.city
+            
+        super().save()

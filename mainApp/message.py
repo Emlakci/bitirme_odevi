@@ -9,5 +9,6 @@ messages = {
     'existed_email'         : 'Girilen e-posta adresi sistemde kayitli...',
     'pass_match_failure'    : 'Sifre eslesmedi! Kontrol edip tekrar girin...',
     'pass_format_failure'   : 'Şifre en az 8 karakter, 1 numara, 1 büyük harf içermelidir.',
-    'check_pass_failure'    : 'Şifreler Eşleşmedi... Lütfen Doğru girdiğinizden emin olun...'
+    'check_pass_failure'    : 'Şifreler Eşleşmedi... Lütfen Doğru girdiğinizden emin olun...',
+    'changing_success'      : 'Değişiklik başarı ile tamamlandı...'
 }

@@ -5,9 +5,24 @@
     $secondary-color: map-get($transparent-colors, 'rich-black');
     $text-color: map-get($text-colors, 'skobelof');
     $text-color-warn: map-get($neon-colors, 'neon-yellow');
+    $text-color-danger: map-get($neon-colors, 'neon-red');
+    $text-color-success: map-get($neon-colors, 'neon-green');
     $input-h   : calc(5rem * var(--scale-factor));
     $transition-inp : .7s;
     //? variables ?//
+
+    //+ Local Class +//
+    .error
+    {
+        border: .2rem solid $text-color-danger;
+        color: $text-color-danger;
+    }
+    .success
+    {
+        border: .2rem solid $text-color-success;
+        color: $text-color-success;
+    }
+    //+ Local Class +//
 
     @include makeBorder(0,solid,1rem, $secondary-color,.5rem);
     position: absolute;
@@ -75,5 +90,20 @@
                 transform: scale(.9);
             }
         }
+    }
+
+    .messageDiv
+    {
+        position: absolute;
+        @include centerElement((center,center));
+        width: 95%;
+        height: 95%;
+        @include makeFlex(row,1,1);
+        border-radius: calc(1rem - .3rem);
+        background-color: rgba(black, 0.8);
+        text-align: center;
+        font-size: var(--huge-fs);
+        text-transform: capitalize;
+        backdrop-filter: blur(.25rem);
     }
 }

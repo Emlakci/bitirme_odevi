@@ -85,6 +85,8 @@
             @include makeFlex(row,0,0);
             padding-block: var(--base-padding);
             width: 100%;
+            min-height: 25dvh;
+            max-height: 30dvh;
 
             .small-img-area
             {
@@ -177,8 +179,8 @@
 
         .p-img
         {
-            width: clamp(4rem,10%,6rem);
-            clip-path: circle(50%);
+            width: clamp(4rem,12%,6rem);
+            border-radius: 50%;
             align-self: first baseline;
         }
             
@@ -186,12 +188,15 @@
         {
             width: 100%;
             padding: var(--base-padding);
+            border-radius: .4rem;
 
             .w100
             {
                 color: var(--text-title);
                 width: 100%;
                 resize: none;
+                font-size: var(--large-fs);
+                font-weight: 800;
             }
 
             .w50

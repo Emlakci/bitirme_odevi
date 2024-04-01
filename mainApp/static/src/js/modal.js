@@ -20,77 +20,78 @@ async function createModal(event)
     if (!modal && element.classList.contains('form-icon'))
     {
         const modal_title_name = element.parentElement.getAttribute('data-area-name');
-            const changing_inp_value = element.nextElementSibling.getAttribute('data-text-content');
-            const changing_inp_name = element.nextElementSibling.getAttribute('name');
-            const changing_inp_type = element.nextElementSibling.getAttribute('type');
+        const changing_inp_value = element.nextElementSibling.getAttribute('data-text-content');
+        const changing_inp_name = element.nextElementSibling.getAttribute('name');
+         const changing_inp_type = element.nextElementSibling.getAttribute('type');
     
-            //modal div
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            modal.id = 'modal';
-            // title div
-            const modal_title = document.createElement('h3');
-            modal_title.className = 'title';
-            modal_title.textContent = modal_title_name;
+        //modal div
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.id = 'modal';
+        // title div
+        const modal_title = document.createElement('h3');
+        modal_title.className = 'title';
+        modal_title.textContent = modal_title_name;
             
-            // content div ~ form
-            const modal_content = document.createElement('div');
-            modal_content.className = 'form-area';
-            const update_form = document.createElement('form');
-            update_form.id = 'update-form'
+        // content div ~ form
+        const modal_content = document.createElement('div');
+        modal_content.className = 'form-area';
+        const update_form = document.createElement('form');
+        update_form.id = 'update-form'
             
-            // create hidden input area for input names
-            const hiddenInp = document.createElement('input');
-            hiddenInp.setAttribute('type', 'hidden');
-            hiddenInp.setAttribute('name', 'hidden_name');
-            hiddenInp.setAttribute('value', `${changing_inp_name}`);
+        // create hidden input area for input names
+        const hiddenInp = document.createElement('input');
+        hiddenInp.setAttribute('type', 'hidden');
+        hiddenInp.setAttribute('name', 'hidden_name');
+        hiddenInp.setAttribute('value', `${changing_inp_name}`);
     
-            const input = document.createElement('input');
-            input.setAttribute('placeHolder', `${changing_inp_value}`);
-            input.setAttribute('name', 'changing_value');
-            input.setAttribute('type', `${changing_inp_type}`);
+        const input = document.createElement('input');
+        input.setAttribute('placeHolder', `${changing_inp_value}`);
+        input.setAttribute('name', 'changing_value');
+        input.setAttribute('type', `${changing_inp_type}`);
+        //? if password is updating...
+        const input2 = changing_inp_type === 'password' ? createPassInput2(changing_inp_value) : createHiddenInput();            
             //? if password is updating...
-            const input2 = changing_inp_type === 'password' ? createPassInput2(changing_inp_value) : createHiddenInput();            
-            //? if password is updating...
-            const inputPass = document.createElement('input');
-            inputPass.setAttribute('placeHolder', 'Sifre Kontrolu');
-            inputPass.setAttribute('name', 'control_pass');
-            inputPass.setAttribute('type', 'password');
+        const inputPass = document.createElement('input');
+        inputPass.setAttribute('placeHolder', 'Sifre Kontrolu');
+        inputPass.setAttribute('name', 'control_pass');
+        inputPass.setAttribute('type', 'password');
 
-            [input, input2, inputPass, hiddenInp ].forEach((item)=>{
-                update_form.appendChild(item);
-            });
-            modal_content.appendChild(update_form);
+        [input, input2, inputPass, hiddenInp ].forEach((item)=>{
+            update_form.appendChild(item);
+        });
+        modal_content.appendChild(update_form);
             
-            //btn-area div
-            const modal_btn_area = document.createElement('div');
-            modal_btn_area.className = 'btn-area';
-            const btn_close = document.createElement('button');
-            btn_close.setAttribute('type', 'reset');
-            btn_close.setAttribute('form', update_form.id);
-            btn_close.addEventListener('click', ()=> closeModal(modal.id));
-            btn_close.textContent = 'KAPAT';
-            const btn_submit = document.createElement('button');
-            btn_submit.setAttribute('type', 'button');
-            btn_submit.addEventListener('click', ()=> submitForm(update_form.id, modal.id, modal_title_name));
-            btn_submit.textContent = 'GONDER';
-            [btn_close, btn_submit ].forEach((item)=>{
-                modal_btn_area.appendChild(item);
-            });
-            // append everthing inside the modal div
-            [modal_title, modal_content, modal_btn_area ].forEach((item)=>{
-                    modal.appendChild(item);
-                });
+        //btn-area div
+        const modal_btn_area = document.createElement('div');
+        modal_btn_area.className = 'btn-area';
+        const btn_close = document.createElement('button');
+        btn_close.setAttribute('type', 'reset');
+        btn_close.setAttribute('form', update_form.id);
+        btn_close.addEventListener('click', ()=> closeModal(modal.id));
+        btn_close.textContent = 'KAPAT';
+        const btn_submit = document.createElement('button');
+        btn_submit.setAttribute('type', 'button');
+        btn_submit.addEventListener('click', ()=> submitForm(update_form.id, modal.id, modal_title_name));
+        btn_submit.textContent = 'GONDER';
+        [btn_close, btn_submit ].forEach((item)=>{
+            modal_btn_area.appendChild(item);
+        });
+        // append everthing inside the modal div
+        [modal_title, modal_content, modal_btn_area ].forEach((item)=>{
+            modal.appendChild(item);
+        });
     
         return modal;
     };
 };
+
 //~ function that controls submit event
 async function submitForm (formId, modalId, modalTitleName)
 {
     let form = document.getElementById(formId);
     const formData = new FormData(form);
-    console.log(csrfToken)
+    // console.log(csrfToken)
     formData.append('csrfmiddlewaretoken',csrfToken);
 
     try 
@@ -105,8 +106,10 @@ async function submitForm (formId, modalId, modalTitleName)
         });    
         // close form ~ modal after successful post event.
         if (response.ok && response.status == 200) 
-        {        
-            closeModal(modalId);
+        {       
+            let responseData = await response.json()
+            // console.log(responseData);
+            messageDiv(responseData, modalId, 'success'); 
             // reflesh page for user infos
             if (modalTitleName != 'Sifre Guncelleme') // reflesh current page
             {
@@ -122,19 +125,8 @@ async function submitForm (formId, modalId, modalTitleName)
         else // passwords didn't matched
         {
             // console.error('hata')
-            let responseData = await response.json()
-
-            const errorDiv = document.createElement('h2');
-            errorDiv.className = 'errorDiv';
-            errorDiv.textContent = responseData.error;
-
-            let modal = document.getElementById(modalId);
-            modal.append(errorDiv);
-            // close message box
-            const removeMessage = setTimeout(()=>{
-                errorDiv.remove()
-            },5000);
-            removeMessage(errorDiv);
+            let responseData = await response.json();
+            await messageDiv(responseData, modalId, 'error');
         }
     } 
     catch (error)
@@ -167,4 +159,27 @@ function createHiddenInput ()
 
     return input2
 };
+
+async function messageDiv (responseData,modalId, messageType)
+{
+    return new Promise((reject,resolve) =>{
+        const messageDiv = document.createElement('h2');
+        messageDiv.className = 'messageDiv';
+        messageDiv.classList.add(messageType);
+        messageDiv.textContent = responseData.message;
+
+        let modal = document.getElementById(modalId);
+        modal.append(messageDiv);
+        // close message box
+        const removeMessage = setTimeout(()=>{
+            messageDiv.remove();
+            if (messageType != 'error')
+                closeModal(modalId);
+            resolve(); // ends the PROMISE
+        },5000);
+    });
+    
+
+    
+}
 

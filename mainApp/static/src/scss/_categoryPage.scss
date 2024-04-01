@@ -1,0 +1,60 @@
+#categotyNav
+{
+    grid-column: 3/ 11;
+    grid-row: 1;
+}
+
+.navBar
+{
+    min-height: 10dvh;
+    @include d-3BoxShadow();
+    display: grid;
+    place-items: center;
+
+    ul 
+    {
+        width: 100%;
+        @include makeFlex(row,4,1,1rem,wrap);
+        
+        li
+        {
+            @include makeFlex(row,4,1,1rem,wrap);
+            border: 2px solid black;
+            
+            .category-link
+            {
+                font-size: var(--large-fs);
+                font-size: 900;
+                padding: calc(var(--base-padding) / 2);
+
+            }
+
+        }
+    }
+}
+
+.product-list
+{
+    grid-column: 1/ -1;
+    grid-row: 2;
+
+    @include makeFlex(row,4,1,0rem,wrap);
+
+    min-height: 60dvh;
+    margin-top: calc(var(--base-padding) * 2);
+
+    .product-container
+    {
+        $base-p-card-w : 24rem; 
+        @include makeGrid(auto-fill,($base-p-card-w,1fr),var(--base-padding),center,center);
+
+        .product-card
+        {
+            width: clamp($base-p-card-w,25%,25%);
+            padding: $card-padding;
+
+            @extend %product-card;
+        }
+    }
+
+}

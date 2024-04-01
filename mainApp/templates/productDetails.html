@@ -208,15 +208,23 @@
         <section id="comments-area" class="comments details">
             <h2 class="comment-title">Degerlendirmeler</h2>
             <form  method="POST" id="comment">
-                <img class="p-img" src="/img/avatar.png" alt="">
+                {% csrf_token %}
+                {% if user.is_authenticated %}
+                <img class="p-img" src="{{ user.customuser.profile_img.url }}" alt="">
+                {% else %}
+                <img class="p-img" src="{% static 'img/avatar.png' %}" alt="">
+                {% endif %}
+                    
                 <div class="input">
                     <textarea class="input w100" name="comment" rows="5" maxlength="250" placeholder="Bir seyler yaz..."></textarea>
                     <button class="input w50" type="submit">GONDER</button>
                 </div>
             </form>
+            {% for post in posts  %}
             <div style="min-width: 100%;" class="user-comments">
                 <p class="posts">{{ post.comment }}<br><small class="text-date">{{ post.user.username }}-{{ post.city }}-{{ post.time_stamp }}</small></p>         
             </div>
+            {% endfor %}
         </section>
         <!-- comments area end -->
         <!-- newsletter form start -->
@@ -235,22 +243,3 @@
 
     </main>
 {% endblock body %}
-    
-  
-                    <!-- <div class="small-img-area">
-                        <img class="p-img small" src="./img/products//f2.jpg" alt="">
-                    </div>
-                    <div class="small-img-area">
-                        <img class="p-img small" src="./img/products/f3.jpg" alt="">
-                    </div>
-                    <div class="small-img-area">
-                        <img class="p-img small" src="./img/products/f4.jpg" alt="">
-                    </div> -->
-
-<!-- 
-                    {% if img_field_state.i %}
-                            <div class="small-img-area">
-                                <img class="p-img small" src="{{ product.p_img_|add:i.url}}" alt="">
-                                <p>{{ product.img_fields.i.url }}</p>
-                            </div>
-                        {% endif %}   -->

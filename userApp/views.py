@@ -129,9 +129,111 @@ def registerPage(request):
 
 @login_required(login_url='loginPage')
 def accountPage(request):
-    context ={}
+    context = {}
+    user = request.user
+    #get authenticated user
+    if request.user.is_authenticated:
+        try:
+            custom_user = user.customuser
+            user_age = custom_user.calculate_age()
+
+            context['auth_user'] = user
+            context['auth_user_age'] = user_age
+        except:
+            print('error')
+            pass
     
-    return render(request,'accountPage.html', context)
+    #get changing form values
+    if request.method == 'POST':
+        print(request.POST)
+        changingInpName = request.POST.get('hidden_name')
+        changing_value = request.POST.get('changing_value')
+        
+         # if profile img was posted as value  
+        if changingInpName == 'profile_img':
+            changing_value = request.FILES['changing_value']
+        
+        password = request.POST.get('control_pass')
+        
+        # get second inp_value for changing password process
+        changing_value_2 = request.POST.get('changing_value_2') if 'changing_value_2' in request.POST else None
+
+        # control pass for accept changing process
+        if changing_value and password:
+            # check if user password is matched
+            if check_password(password,user.password):
+                print('accepted')
+
+                if changingInpName == 'first_name' or changingInpName == 'last_name' or changingInpName == 'username' or changingInpName == 'email':
+                    setattr(user, changingInpName, changing_value)
+                    user.save()
+                    print(getattr(user, changingInpName))
+
+                    message = {
+                        'message' : messages.get('changing_success')
+                    }
+
+                    return JsonResponse(message, status=200) 
+                   
+                if changingInpName == 'birth_date' or changingInpName == 'city' or changingInpName == 'profile_img':
+                    setattr(user.customuser, changingInpName, changing_value)
+                    user.customuser.save()
+                    print(getattr(user.customuser, changingInpName))
+
+                    message = {
+                        'message' : messages.get('changing_success')
+                    }
+                    
+                    return JsonResponse(message, status=200)
+              
+                if changingInpName == 'password':
+                    if changing_value_2 :
+                        # check if passwords typed by the user are equal
+                        if changing_value == changing_value_2 :
+                            # control the password for right pattern
+                            if checkPassIsSuitable(changing_value):
+                                user.set_password(changing_value)
+                                user.save()
+                                print(getattr(user, changingInpName))
+                                message = {
+                                    'message' : messages.get('changing_success')
+                                }
+                    
+                                return JsonResponse(message, status=200)
+                            
+                            else: #pass is not suitable
+                                print('process failed', 'Sifre kriterlere uygun degil!')
+                                message = {
+                                    'message': messages.get('pass_format_failure')
+                                }
+                                return JsonResponse(message, status=406)
+                        else: # given pass didn't matched
+                            print('process failed', 'Sifreler eslesmedi!')
+                            message = {
+                                'message': messages.get('pass_match_failure')
+                            }
+                            return JsonResponse(message, status=406)
+                    else: # user didn't rewrite the password wanted to update     
+                        print('process failed', 'Tekrar sifre alani bos!')
+                        message = {
+                            'message': messages.get('null_values')
+                            }
+                        return JsonResponse(message, status=406)
+            else :
+                print('passwords did not matched!')
+                message = {
+                    'message': messages.get('check_pass_failure')
+                }
+                return JsonResponse(message, status=406)
+        else:
+            print('null values can not be accepted!')
+            message = {
+                'message' : messages.get('null_values')
+                }
+            return JsonResponse(message, status=406)
+
+    else:
+        return render(request,'accountPage.html', context)
 
 @login_required(login_url='loginPage')
 def user_logout(request):
