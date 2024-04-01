@@ -114,3 +114,10 @@ def categoryPage(request, category_slug):
     }
 
     return render(request,'categoryPage.html', context)
+
+#~ Errors Handlers
+def error_404(requset):
+    return render(requset, 'errors/error404.html')
+
+def error_500(requset):
+    return render(requset, 'errors/error500.html')
